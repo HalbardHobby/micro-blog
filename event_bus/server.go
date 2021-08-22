@@ -22,15 +22,15 @@ func receiveEvent(c echo.Context) error {
 }
 
 func fanoutEvent(event []byte) {
-	_, err := http.Post("http://localhost:5000/events", "application/json", bytes.NewBuffer(event))
+	_, err := http.Post("http://localhost:5000/events/", "application/json", bytes.NewBuffer(event))
 	if err != nil {
 		log.Print(err)
 	}
-	_, err = http.Post("http://localhost:5001/events", "application/json", bytes.NewBuffer(event))
+	_, err = http.Post("http://localhost:5001/events/", "application/json", bytes.NewBuffer(event))
 	if err != nil {
 		log.Print(err)
 	}
-	_, err = http.Post("http://localhost:5002/events", "application/json", bytes.NewBuffer(event))
+	_, err = http.Post("http://localhost:5002/events/", "application/json", bytes.NewBuffer(event))
 	if err != nil {
 		log.Print(err)
 	}
