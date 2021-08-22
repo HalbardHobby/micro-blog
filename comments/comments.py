@@ -23,4 +23,13 @@ def create_comment(post_id):
 
     comments_by_post[post_id].append(new_comment)
 
+    requests.post(url='http://localhost:4999/events', json={
+        'type': 'PostCreated',
+        'data': {
+            'id': new_comment['id'],
+            'content': new_comment['content'],
+            'postId': post_id
+        }
+    })
+
     return jsonify(new_comment), 201
