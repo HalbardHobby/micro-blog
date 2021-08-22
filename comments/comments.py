@@ -11,7 +11,7 @@ def list_comments(post_id):
     if post_id in comments_by_post:
         return jsonify(comments_by_post[post_id]), 200
     else:
-        return [], 200
+        return jsonify([]), 200
 
 @bp.route('/<post_id>', methods=['POST'])
 def create_comment(post_id):
