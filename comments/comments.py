@@ -1,12 +1,12 @@
 import uuid
+import requests
 from flask import Blueprint, request, jsonify
 
-bp = Blueprint('posts', __name__, url_prefix=None)
+bp = Blueprint('posts', __name__, url_prefix='/posts')
 
 comments_by_post = {}
 
 @bp.route('/<post_id>', methods=['GET'])
-@bp.route('/index', methods=['GET'])
 def list_comments(post_id):
     if post_id in comments_by_post:
         return jsonify(comments_by_post[post_id]), 200

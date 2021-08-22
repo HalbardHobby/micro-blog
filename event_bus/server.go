@@ -15,6 +15,7 @@ func receiveEvent(c echo.Context) error {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	log.Print(string(b))
 	defer fanoutEvent(b)
 
 	return c.NoContent(http.StatusOK)
@@ -39,7 +40,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
 
-	e.POST("/", receiveEvent)
+	e.POST("/events", receiveEvent)
 
 	e.Logger.Fatal(e.Start(":4999"))
 }
