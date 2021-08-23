@@ -46,7 +46,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
 
-	e.POST("/events", receiveEvent)
+	e.POST("/events/", receiveEvent)
 
 	e.Logger.Fatal(e.Start(":4999"))
 }

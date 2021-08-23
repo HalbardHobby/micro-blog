@@ -46,7 +46,7 @@ func receiveEvent(c echo.Context) error {
 		res, _ := json.Marshal(event)
 		log.Print(string(res))
 
-		_, err := http.Post("http://localhost:4999/events",
+		_, err := http.Post("http://localhost:4999/events/",
 			"application/json",
 			bytes.NewBuffer(res))
 
