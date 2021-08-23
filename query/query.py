@@ -18,7 +18,8 @@ def receive_event():
         comment = {
             'id': req['data']['id'],
             'content': req['data']['content'],
-            'postId': req['data']['postId']
+            'postId': req['data']['postId'],
+            'status': req['data']['status']
         }
         posts[req['data']['postId']]['comments'].append(comment)
 

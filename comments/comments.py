@@ -6,6 +6,7 @@ bp = Blueprint('posts', __name__, url_prefix='/posts')
 
 comments_by_post = {}
 
+
 @bp.route('/<post_id>', methods=['GET'])
 def list_comments(post_id):
     if post_id in comments_by_post:
@@ -13,11 +14,15 @@ def list_comments(post_id):
     else:
         return jsonify([]), 200
 
+
 @bp.route('/<post_id>', methods=['POST'])
 def create_comment(post_id):
     req = request.get_json()
-    new_comment = { 'id': str(uuid.uuid4())[:8], 'content': req['content'] }
-    
+    new_comment = {'id': str(uuid.uuid4())[:8],
+                   'content': req['content'],
+                   'status': 'pending'
+                   }
+
     if post_id not in comments_by_post:
         comments_by_post[post_id] = []
 
@@ -28,7 +33,8 @@ def create_comment(post_id):
         'data': {
             'id': new_comment['id'],
             'content': new_comment['content'],
-            'postId': post_id
+            'postId': post_id,
+            'status': 'pending'
         }
     })
 
