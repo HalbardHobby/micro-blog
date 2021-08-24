@@ -17,7 +17,7 @@ def create_post():
     new_post = { 'id': str(uuid.uuid4())[:8], 'title': req['title'] }
     post_list.append(new_post)
 
-    requests.post(url='http://localhost:4999/events/', json={
+    requests.post(url='http://event-bus-service:4999/events/', json={
         'type': 'PostCreated',
         'data': new_post
     })

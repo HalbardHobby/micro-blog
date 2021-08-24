@@ -18,7 +18,7 @@ def receive_event():
         comment = next((x for x in comms if x['id'] == id), None)
         comment['status'] = status
 
-        requests.post(url='http://localhost:4999/events/', json={
+        requests.post(url='http://event-bus-service:4999/events/', json={
         'type': 'CommentUpdated',
         'data': {
             'id': id,

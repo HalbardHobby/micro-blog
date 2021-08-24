@@ -33,22 +33,22 @@ func getEventHistory(c echo.Context) error {
 func fanoutEvent(event []byte) {
 	log.Print(string(event))
 
-	_, err := http.Post("http://localhost:5000/events/", "application/json", bytes.NewBuffer(event))
+	_, err := http.Post("http://posts-cluster-service:5000/events/", "application/json", bytes.NewBuffer(event))
 	if err != nil {
 		log.Print(err)
 	}
-	_, err = http.Post("http://localhost:5001/events/", "application/json", bytes.NewBuffer(event))
+	_, err = http.Post("http://comments-cluster-service:5000/events/", "application/json", bytes.NewBuffer(event))
 	if err != nil {
 		log.Print(err)
 	}
-	_, err = http.Post("http://localhost:5002/events/", "application/json", bytes.NewBuffer(event))
-	if err != nil {
-		log.Print(err)
-	}
-	_, err = http.Post("http://localhost:5003/events/", "application/json", bytes.NewBuffer(event))
-	if err != nil {
-		log.Print(err)
-	}
+	// _, err = http.Post("http://localhost:5002/events/", "application/json", bytes.NewBuffer(event))
+	// if err != nil {
+	// 	log.Print(err)
+	// }
+	// _, err = http.Post("http://localhost:5003/events/", "application/json", bytes.NewBuffer(event))
+	// if err != nil {
+	// 	log.Print(err)
+	// }
 }
 
 func main() {
