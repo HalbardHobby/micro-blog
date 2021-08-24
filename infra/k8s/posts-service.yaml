@@ -11,4 +11,19 @@ spec:
       protocol: TCP
       port: 5000
       targetPort: 5000
-  
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-cluster-service
+spec:
+  type: ClusterIP
+  selector:    
+    app: posts
+  ports:
+    - name: posts
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
