@@ -1,3 +1,4 @@
+import comments
 from flask import Blueprint, request, jsonify
 
 bp = Blueprint('query', __name__, url_prefix=None)
@@ -22,6 +23,13 @@ def receive_event():
             'status': req['data']['status']
         }
         posts[req['data']['postId']]['comments'].append(comment)
+    elif req['type'] == 'CommentUpdated':
+        comments = posts[req['data']['postId']]['comments']
+        id = req['data']['id']
+        comm = next((x for x in comments if x['id'] == id), None)
+
+        comm['content'] = req['data']['content']
+        comm['status'] = req['data']['status']
 
     return '', 201
 
