@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: event-bus
-          image: halbard/micro_bus:0.1.0
+          image: halbard/micro_bus:0.1.1
