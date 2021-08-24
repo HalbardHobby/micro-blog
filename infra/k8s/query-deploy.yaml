@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: query
-          image: halbard/micro_query:0.1.0
+          image: halbard/micro_query:0.1.1

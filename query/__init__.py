@@ -15,7 +15,10 @@ def create_app():
     def resource_not_found(e):
         return jsonify(error=str(e)), 404
 
-    res = requests.get(url='http://localhost:4999/events/').json()
-    map(query.handle_event, res)
+    try:
+        res = requests.get(url='http://event-bus-service:4999/events/').json()
+        map(query.handle_event, res)
+    except:
+        pass
 
     return app
