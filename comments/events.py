@@ -9,7 +9,7 @@ bp = Blueprint('events', __name__, url_prefix='/events')
 def receive_event():
     req = request.get_json()
 
-    if req['type'] == 'CommmentModerated':
+    if req['type'] == 'CommentModerated':
         id = req['data']['id']
         postId = req['data']['postId']
         status = req['data']['status']
