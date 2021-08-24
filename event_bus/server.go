@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -10,6 +11,8 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
+var event_history = make([]json.RawMessage, 0)
+
 func receiveEvent(c echo.Context) error {
 	b, err := io.ReadAll(c.Request().Body)
 	if err != nil {
@@ -17,8 +20,14 @@ func receiveEvent(c echo.Context) error {
 	}
 	log.Print(string(b))
 	defer fanoutEvent(b)
+	event_history = append(event_history, b)
 
 	return c.NoContent(http.StatusOK)
+}
+
+func getEventHistory(c echo.Context) error {
+	// json_history, _ := json.Marshal(event_history)
+	return c.JSON(http.StatusOK, event_history[:])
 }
 
 func fanoutEvent(event []byte) {
@@ -46,6 +55,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
 
+	e.GET("/events/", getEventHistory)
 	e.POST("/events/", receiveEvent)
 
 	e.Logger.Fatal(e.Start(":4999"))
