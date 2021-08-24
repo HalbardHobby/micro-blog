@@ -45,10 +45,10 @@ func fanoutEvent(event []byte) {
 	if err != nil {
 		log.Print(err)
 	}
-	// _, err = http.Post("http://localhost:5003/events/", "application/json", bytes.NewBuffer(event))
-	// if err != nil {
-	// 	log.Print(err)
-	// }
+	_, err = http.Post("http://mod-service:5003/events/", "application/json", bytes.NewBuffer(event))
+	if err != nil {
+		log.Print(err)
+	}
 }
 
 func main() {
