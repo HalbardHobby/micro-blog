@@ -11,7 +11,7 @@ post_list = []
 def list_posts():
     return jsonify(post_list), 200
 
-@bp.route('/', methods=['POST'])
+@bp.route('/create/', methods=['POST'])
 def create_post():
     req = request.get_json()
     new_post = { 'id': str(uuid.uuid4())[:8], 'title': req['title'] }

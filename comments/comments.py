@@ -7,7 +7,7 @@ bp = Blueprint('posts', __name__, url_prefix='/posts')
 comments_by_post = {}
 
 
-@bp.route('/<post_id>', methods=['GET'])
+@bp.route('/<post_id>/comments/', methods=['GET'])
 def list_comments(post_id):
     if post_id in comments_by_post:
         return jsonify(comments_by_post[post_id]), 200
@@ -15,7 +15,7 @@ def list_comments(post_id):
         return jsonify([]), 200
 
 
-@bp.route('/<post_id>', methods=['POST'])
+@bp.route('/<post_id>/comments/', methods=['POST'])
 def create_comment(post_id):
     req = request.get_json()
     new_comment = {'id': str(uuid.uuid4())[:8],
