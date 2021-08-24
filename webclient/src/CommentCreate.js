@@ -6,7 +6,7 @@ export default ({ postId }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post(`http://localhost:5001/posts/${postId}`, {
+    await axios.post(`http://posts.com/posts/${postId}`, {
       content
     });
 
