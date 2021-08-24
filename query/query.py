@@ -1,4 +1,3 @@
-import comments
 from flask import Blueprint, request, jsonify
 
 bp = Blueprint('query', __name__, url_prefix=None)
