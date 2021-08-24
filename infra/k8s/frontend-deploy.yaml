@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: halbard/micro_frontend:0.1.2
+          image: halbard/micro_frontend:0.1.1
